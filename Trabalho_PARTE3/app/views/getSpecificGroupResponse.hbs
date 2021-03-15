@@ -1,0 +1,61 @@
+<h1>Group</h1>
+
+<p><strong>Name:</strong> {{name}}</p>
+<p><strong>Description:</strong> {{description}}</p>
+<style> 
+    th,td,tr{
+        text-align: center;
+    }
+    #left {   
+        float: left ;
+        margin:10px
+    }  
+    #right {   
+        float: left;
+        margin:10px
+    }
+</style>
+<table style="width: 100%">
+	<thead>
+		<tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Rating Count</th>
+            <th>Total Rating</th>
+            <th>Url</th>
+            <th>Delete Game From Group</th>
+		</tr>
+		<body>
+            {{#each games}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{rating}}</td>
+                <td>{{rating_count}}</td>
+                <td>{{total_rating}}</td>
+                <td><a href= {{url}}>{{url}}</a></td>
+                <td>
+                    <form action="/covida/groups/games/gameFromGroup" method="POST">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="targetGroup" value='{"groupId":"{{@root.id}}","gameName":"{{name}}"}'>
+                        <input type="submit" value ="Delete">
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </body>
+	</thead>
+</table>
+<br> 
+<div id="left">
+    <form action="/covida/groupForm" method="GET">
+        <input type="hidden" id="groupId" name="groupId" value='{{id}}'>
+        <input type="submit" value ="Edit Group">
+    </form><br>
+</div> 
+<div id= "right">
+    <form action="/covida/groups/group/delete" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" id="groupId" name="groupId" value='{{id}}'>
+        <input type="submit" value ="Delete Group">
+    </form> 
+</div>

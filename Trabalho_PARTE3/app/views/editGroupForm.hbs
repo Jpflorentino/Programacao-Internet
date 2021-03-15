@@ -1,0 +1,13 @@
+<h1>Edit Group</h1>
+
+
+<form action="/covida/groups/group/edit" method="POST">
+    {{!Não é possivel colocar diretamente método PUT em form, então utiliza-se "hidden" e "_method" para obter qualquer formulario}}
+    <input type="hidden" name="_method" value="PUT"> 
+	<input type="hidden" id="group_id" name="group_id" value='{{id}}'><br>
+	<label for="name">New Name: </label><br>
+	<input type="text" id="name" name="name" required><br>
+    <label for="description">New Description: </label><br>
+    <input style="height:200px" type="text" id="description" name="description" required><br><br>
+	<input type="submit" value="Edit">
+</form>

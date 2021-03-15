@@ -1,0 +1,24 @@
+<h1>Delete Account</h1>
+
+<p>Do you want to delete your account? </p>
+<style> 
+    #left {   
+        float: left ;
+        margin:10px
+    }  
+    #right {   
+        float: left;
+        margin:10px
+    }
+</style>
+<div id="left">
+    <form action="/covida/auth/delete" method="POST">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value ="Yes">
+    </form><br>
+</div> 
+<div id= "right">
+    <form action="/" method="GET">
+        <input type="submit" value ="No">
+    </form> 
+</div>

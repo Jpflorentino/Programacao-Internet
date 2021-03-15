@@ -1,0 +1,16 @@
+<h1>Get games by rating</h1>
+
+
+<form action="/covida/groups/gamesBetweenMinMax" method="GET">
+	<label for="group">Choose Group: </label><br>
+	<select name="groupId" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" required>
+		{{#each groups}}
+			<option value='{{id}}'>{{name}}</option>
+		{{/each}}                          
+	</select><br>
+	<label for="min_Rating">Minimum Rating: </label><br>
+	<input type="text" id="min_Rating" name="min_Rating" required><br>
+    <label for="max_Rating">Maximum Rating: </label><br>
+	<input type="text" id="max_Rating" name="max_Rating" required><br><br>
+	<input type="submit" value="Search">
+</form>

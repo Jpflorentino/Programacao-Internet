@@ -1,0 +1,36 @@
+<h1>Game By Rating</h1>
+
+<p>Games Inside {{minRating}} and {{maxRating}}</p>
+
+<style>
+    th,td,tr{
+        text-align: center;
+    }
+</style>
+
+<table style="width: 100%">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Total Rating</th>
+            <th>Url</th>
+            <th>Remove From Group</th>
+		</tr>
+		<body>
+            {{#each game}}
+                <tr>
+                    <td style="width: 15%;">{{name}}</td>
+                    <td style="width: 15%;">{{total_rating}}</td>
+                    <td style="width: 15%;"><a href= {{url}}>{{url}}</a></td>
+                    <td style="width: 15%;">
+                    <form action="/covida/groups/games/gameFromGroup" method="POST">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" id="targetGroup" name="targetGroup" value='{"groupId":"{{@root.groupId}}","gameName":"{{name}}"}'>
+                    <input type="submit" value ="Delete">
+                    </form>
+                </td>
+                </tr>
+            {{/each}}
+        </body>
+	</thead>
+</table>

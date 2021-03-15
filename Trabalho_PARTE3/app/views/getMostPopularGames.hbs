@@ -1,0 +1,76 @@
+<h1>Games List</h1>
+
+<p><strong>Number of items:</strong> {{size}}</p>
+
+<input type="text" id="myInput" onkeyup="filterFn()" placeholder="Search for games.."><br><br>
+
+<style>
+    th,td,tr{
+        text-align: center;
+    }
+</style>
+<table id="myTable" style="width: 100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Rating Count</th>
+            <th>Total Rating</th>
+            <th>Url</th>
+            {{#if user}}
+            <th>Add To Group</th>
+            {{/if}}
+        </tr>
+        <body>
+            {{#each games}}
+            <tr>
+                <td id = "gameName">{{name}}</td>
+                <td>{{rating}}</td>
+                <td>{{rating_count}}</td>
+                <td>{{total_rating}}</td>
+                <td><a href= {{url}}>{{url}}</a></td>
+                {{#if @root.user}}
+                    <td style="width: 15%;">
+                    <form action="/covida/groups/games/gameToGroup" method="POST">
+                        <input type="hidden" name="_method" value="PUT"> 
+                        <div style="display: flex; justify-content: space-around;">
+                            <select name="targetGroup" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" required>
+                                {{#each @root.groups}}
+                                    <option value='{"groupId":"{{id}}","gameName":"{{../name}}"}'>{{name}}</option>
+                                {{/each}}                          
+                            </select>
+                            <input type="submit" value ="Add">
+                        </form>
+                    </td>
+                {{/if}}
+            </tr>
+            {{/each}}
+        </body>
+    </thead>
+</table>
+
+<script>
+    function filterFn() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+        }       
+    }
+}
+</script>
+
+
+
+
+

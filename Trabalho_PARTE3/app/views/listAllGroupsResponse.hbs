@@ -1,0 +1,58 @@
+<h1>Groups List</h1>
+
+<p><strong>Number of groups:</strong> {{size}}</p>
+
+
+<input type="text" id="myInput" onkeyup="filterFn()" placeholder="Search for names.."><br><br>
+
+
+<style>
+    th,td,tr{
+        text-align: center;
+    }
+</style>
+
+<table id="myTable" style="width: 100%">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+            <th>View Group</th>
+		</tr>
+		<body>
+            {{#each groups}}
+            <tr> 
+                <td style="width: 15%;">{{name}}</td>
+                <td style="width: 15%;">{{description}}</td>
+                <td style="width: 15%;">
+                    <form action="/covida/groups/specificGroup" method="GET">
+                    <input type="hidden" id="groupId" name="groupId" value='{{id}}'>
+                    <input type="submit" value ="View">
+                    </form>
+                </td>
+            </tr>
+            {{/each}}
+        </body>
+	</thead>
+</table>
+
+<script>
+    function filterFn() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+        } else {
+            tr[i].style.display = "none";
+        }
+        }       
+    }
+}
+</script>
